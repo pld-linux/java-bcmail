@@ -9,7 +9,7 @@
 Summary:	S/MIME and CMS libraries for Bouncy Castle
 Name:		java-%{srcname}
 Version:	1.46
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Java
 URL:		http://www.bouncycastle.org/
@@ -57,9 +57,10 @@ find -type f -name "*.class" | xargs -r rm -v
 find -type f -name "*.jar" | xargs -r rm -v
 
 %build
-CLASSPATH=$(build-classpath junit4 bcprov javamail)
+CLASSPATH=$(build-classpath junit bcprov mail)
 export CLASSPATH
 
+cd src
 %javac -g -target 1.5 -encoding UTF-8 $(find . -type f -name "*.java")
 jarfile="../bcmail-%{version}.jar"
 
@@ -69,7 +70,7 @@ test ! -d classes && mf="" || mf="`find classes/ -type f -name "*.mf" 2>/dev/nul
 test -n "$mf" && %jar cvfm $jarfile $mf $files || %jar cvf $jarfile $files
 
 %if %{with tests}
-CLASSPATH=${PWD:-$(pwd)}:$(build-classpath junit javamail bcprov)
+CLASSPATH=${PWD:-$(pwd)}:$(build-classpath junit mail bcprov)
 export CLASSPATH
 for test in $(find -name AllTests.class); do
 	test=${test#./}; test=${test%.class}; test=$(echo $test | tr / .)

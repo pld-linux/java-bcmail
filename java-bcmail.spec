@@ -5,7 +5,6 @@
 
 %define		archivever	jdk16-%(echo %{version} | tr -d .)
 %define		srcname		bcmail
-%include	/usr/lib/rpm/macros.java
 Summary:	S/MIME and CMS libraries for Bouncy Castle
 Name:		java-%{srcname}
 Version:	1.46

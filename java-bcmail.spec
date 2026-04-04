@@ -10,7 +10,7 @@
 Summary:	S/MIME and CMS libraries for Bouncy Castle
 Name:		java-%{srcname}
 Version:	1.46
-Release:	4
+Release:	5
 License:	MIT
 Group:		Libraries/Java
 URL:		http://www.bouncycastle.org/

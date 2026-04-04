@@ -3,12 +3,14 @@
 %bcond_without	javadoc		# don't build javadoc
 %bcond_without	tests		# don't build and run tests
 
+%{?use_default_jdk:%use_default_jdk 8}
+
 %define		archivever	jdk16-%(echo %{version} | tr -d .)
 %define		srcname		bcmail
 Summary:	S/MIME and CMS libraries for Bouncy Castle
 Name:		java-%{srcname}
 Version:	1.46
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries/Java
 URL:		http://www.bouncycastle.org/
@@ -21,12 +23,13 @@ Source0:	bcmail-%{archivever}-FEDORA.tar.gz
 BuildRequires:	java(javamail)
 BuildRequires:	java-bcprov = %{version}
 BuildRequires:	java-junit
-BuildRequires:	jdk >= 1.6
+%buildrequires_jdk
 BuildRequires:	jpackage-utils >= 1.5
 Requires:	java(javamail)
 Requires:	java-bcprov = %{version}
 Obsoletes:	bcmail
 Obsoletes:	bouncycastle-mail
+BuildRequires:	rpmbuild(macros) >= 1.556
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
